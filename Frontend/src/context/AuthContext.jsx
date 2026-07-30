@@ -54,6 +54,8 @@ export function AuthProvider({ children }) {
 
                 setUser(data)
 
+                return data
+
             })
             .catch((error) => {
 
@@ -82,6 +84,8 @@ export function AuthProvider({ children }) {
 
                 setUser(data)
 
+                return data
+
             })
             .catch((error) => {
 
@@ -105,10 +109,20 @@ export function AuthProvider({ children }) {
 
                 setUser(null)
 
+                return true
+
             }
 
+            return false
+
         })
-        .catch((error) => console.log(error))
+        .catch((error) => {
+
+            console.log(error)
+
+            return false
+
+        })
 
     }
 
@@ -117,7 +131,9 @@ export function AuthProvider({ children }) {
     return (
 
         <AuthContext.Provider value={values}>
+
             { children }
+            
         </AuthContext.Provider>
 
     )
