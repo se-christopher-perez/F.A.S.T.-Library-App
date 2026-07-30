@@ -353,16 +353,64 @@ class LookupByID(Resource):
 
         return {}, 204
 
-        
+
+
+class Tags(Resource):
+
+    def get(self):
+
+        tags = Tag.query.all()
+
+        return [tag.to_dict() for tag in tags]
+
+    def post(self):
+
+        user_id = session.get("user_id")
+
+        data = request.get_json()
+
+        name = data["name"]
+
+        if not name:
+
+            return {"error": "Name is required!"}, 422
+
+        exist = Tag.query.filter_by(name=name).first()
+
+        if exist:
+            return {"error": "Tag already exists!"}, 422
+
+        try: 
+
+            new_tag = Tag(
+
+                name=name
+
+            )
+
+            db.session.add(new_tag)
+
+            db.session.commit()
+
+        except ValueError as error:
+
+            db.session.rollback()
+
+            return {"error", str(error)}, 422
+
+        return new_tag.to_dict(), 201
 
 api.add_resource(Signup, "/signup", endpoint="signup")
 api.add_resource(Login, "/login", endpoint="login")
 api.add_resource(Logout, "/logout", endpoint="logout")
 api.add_resource(CheckSession, "/check_session", endpoint="check_session")
 api.add_resource(Projects, "/projects", endpoint="projects")
-api.add_resource(Lookups, "/lookups", endpoint="lookups")
 api.add_resource(ProjectByID, "/projects/<int:id>", endpoint="project_by_id")
+api.add_resource(Lookups, "/lookups", endpoint="lookups")
 api.add_resource(LookupByID, "/lookups/<int:id>", endpoint="lookup_by_id")
+api.add_resource(Tags, "/tags", endpoint="tags")
+
+
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
