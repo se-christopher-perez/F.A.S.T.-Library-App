@@ -353,7 +353,78 @@ class LookupByID(Resource):
 
         return {}, 204
 
+class LookupTags(Resource):
 
+    def post(self, lookup_id):
+
+        user_id = session.get("user_id")
+
+        lookup = Lookup.query.filter_by(id=lookup_id).first()
+
+        error = hidden_forbidden_content(lookup, user_id)
+
+        if error:
+
+            return error
+
+        data = request.get_json()
+
+        tag_name = data.get("name")
+
+        if not tag_name:
+
+            return {"error": "Tag name is required!"}, 422
+
+        tag = Tag.query.filter_by(name=tag_name).first()
+
+        if not tag:
+
+            tag = Tag(name=tag_name)
+
+            db.session.add(tag)
+
+            db.session.commit()
+
+        exist = LookupTag.query.filter_by(lookup_id=lookup.id, tag_id=tag.id).first()
+
+        if exist:
+
+            return {"error": "Tag already connected to this lookup!"}, 422
+
+        new_lookup_tag = LookupTag(lookup_id=lookup.id, tag_id=tag.id)
+
+        db.session.add(new_lookup_tag)
+
+        db.session.commit()
+
+        return new_lookup_tag.to_dict(), 201
+
+class LookupTagByID(Resource):
+
+    def delete(self, lookup_id, tag_id):
+
+        user_id = session.get("user_id")
+
+        lookup = Lookup.query.filter_by(id=lookup_id).first()
+
+        error = hidden_forbidden_content(lookup, user_id)
+
+        if error:
+            return error
+
+        lookup_tag = LookupTag.query.filter_by(
+            lookup_id=lookup_id, tag_id=tag_id
+        ).first()
+
+        if not lookup_tag:
+
+            return {"error": "Connection not found"}, 404
+
+        db.session.delete(lookup_tag)
+
+        db.session.commit()
+
+        return {}, 204
 
 class Tags(Resource):
 
@@ -369,13 +440,13 @@ class Tags(Resource):
 
         data = request.get_json()
 
-        name = data["name"]
+        tag_name = data.get("name")
 
-        if not name:
+        if not tag_name:
 
-            return {"error": "Name is required!"}, 422
+            return {"error": "Tag name is required!"}, 422
 
-        exist = Tag.query.filter_by(name=name).first()
+        exist = Tag.query.filter_by(name=tag_name).first()
 
         if exist:
             return {"error": "Tag already exists!"}, 422
@@ -384,7 +455,7 @@ class Tags(Resource):
 
             new_tag = Tag(
 
-                name=name
+                name=tag_name
 
             )
 
@@ -396,9 +467,27 @@ class Tags(Resource):
 
             db.session.rollback()
 
-            return {"error", str(error)}, 422
+            return {"error": str(error)}, 422
 
         return new_tag.to_dict(), 201
+
+class TagByID(Resource):
+
+    def delete(self, id):
+
+        tag = Tag.query.filter_by(id=id).first()
+
+        if not tag:
+
+            return {"error": "Tag not found"}, 404
+
+        LookupTag.query.filter_by(tag_id=tag.id).delete()
+
+        db.session.delete(tag)
+
+        db.session.commit()
+
+        return {}, 204
 
 api.add_resource(Signup, "/signup", endpoint="signup")
 api.add_resource(Login, "/login", endpoint="login")
@@ -408,8 +497,10 @@ api.add_resource(Projects, "/projects", endpoint="projects")
 api.add_resource(ProjectByID, "/projects/<int:id>", endpoint="project_by_id")
 api.add_resource(Lookups, "/lookups", endpoint="lookups")
 api.add_resource(LookupByID, "/lookups/<int:id>", endpoint="lookup_by_id")
+api.add_resource(LookupTags, "/lookups/<int:lookup_id>/tags", endpoint="lookup_tags")
+api.add_resource(LookupTagByID, "/lookups/<int:lookup_id>/tags/<int:tag_id>", endpoint="lookup_tag_by_id")
 api.add_resource(Tags, "/tags", endpoint="tags")
-
+api.add_resource(TagByID, "/tags/<int:id>", endpoint="tag_by_id")
 
 
 if __name__ == "__main__":
