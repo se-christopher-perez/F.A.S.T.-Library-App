@@ -95,11 +95,12 @@ class Lookup(db.Model, SerializerMixin):
     __tablename__ = "lookups"
 
     serialize_rules = [
-
-        "-user.lookups",
-        "-lookup_projects.lookup", 
+        
+        "-user",
+        "-lookup_projects.lookup",
+        "-lookup_projects.project.user",
         "-lookup_tags.lookup"
-
+        
     ]
 
     id = db.Column(db.Integer, primary_key=True)

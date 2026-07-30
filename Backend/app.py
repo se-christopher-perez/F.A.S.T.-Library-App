@@ -97,18 +97,70 @@ class Projects(Resource):
 
         user_id = session.get("user_id")
 
-        user = User.query.filter_by(id=user_id).first()
+        page = request.args.get("page", 1, type=int)
 
-        if not user:
-            return {"error": "Not logged in"}, 401
+        per_page = request.args.get("per_page", 6, type=int)
+
+        paginated = Project.query.filter_by(user_id=user_id).paginate(
+            page=page, per_page=per_page, error_out=False
+        )
+
+        return {
+
+            "projects": [project.to_dict() for project in paginated.items],
+            "total_pages": paginated.pages,
+            "current_page": paginated.page,
+            "total_projects": paginated.total
+
+        }, 200
+
+    def post(self):
+
+        user_id = session.get("user_id")
+
+        data = request.get_json()
+
+        try:
+
+            new_project = Project(
+
+                user_id = user_id,
+                title = data["title"],
+                description = data["description"],
+                language = data["language"]
+
+            )
+
+            db.session.add(new_project)
+            db.session.commit()
+
+        except (ValueError, KeyError) as error:
+
+            db.session.rollback()
+
+            return {"error": str(error)}, 422
+
+        return new_project.to_dict(), 201
+
+class Lookups(Resource):
+
+    def get(self):
+
+        user_id = session.get("user_id")
+
+        lookups = Lookup.query.filter_by(user_id=user_id).all()
+
+        return [lookup.to_dict() for lookup in lookups], 200
         
-        return [project.to_dict() for project in user.projects], 200
+
+
 
 api.add_resource(Signup, "/signup", endpoint="signup")
 api.add_resource(Login, "/login", endpoint="login")
 api.add_resource(Logout, "/logout", endpoint="logout")
 api.add_resource(CheckSession, "/check_session", endpoint="check_session")
 api.add_resource(Projects, "/projects", endpoint="projects")
+api.add_resource(Lookups, "/lookups", endpoint="lookups")
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
