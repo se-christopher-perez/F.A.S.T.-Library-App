@@ -11,11 +11,10 @@ class User(db.Model, SerializerMixin):
 
     serialize_rules = [
 
+        "-lookups",
         "-projects.user",
         "-projects.lookup_projects.lookup.user",
-        "-lookups.user",
-        "-lookups.lookup_projects.project.user",
-        "-lookups.lookup_tags.tag.lookup_tags",
+        "-projects.lookup_projects.project",
         "-_password_hash"
 
     ]
@@ -52,16 +51,16 @@ class Project(db.Model, SerializerMixin):
 
     serialize_rules = [
 
-        "-user.projects",
-        "-lookup_projects.project",
-        "-lookup_projects.lookup.user",
-        "-lookup_projects.lookup.lookup_tags"
+        "-user",                      
+        "-lookup_projects.project",  
+        "-lookup_projects.lookup.user"
 
     ]
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     description = db.Column(db.String)
+    language = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     user = db.relationship("User", back_populates="projects")
@@ -77,10 +76,9 @@ class LookupProject(db.Model, SerializerMixin):
 
         "-lookup.lookup_projects",
         "-lookup.user",
-        "-lookup.lookup_tags",
         "-project.lookup_projects",
         "-project.user"
-        
+
     ]
 
     id = db.Column(db.Integer, primary_key=True)
@@ -107,7 +105,6 @@ class Lookup(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     description = db.Column(db.String)
-    language = db.Column(db.String)
     category = db.Column(db.String)
     content = db.Column(db.String)
     beginner_explanation = db.Column(db.String)
