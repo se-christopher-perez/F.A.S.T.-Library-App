@@ -9,6 +9,17 @@ class User(db.Model, SerializerMixin):
 
     __tablename__ = "users"
 
+    serialize_rules = [
+
+        "-projects.user",
+        "-projects.lookup_projects.lookup.user",
+        "-lookups.user",
+        "-lookups.lookup_projects.project.user",
+        "-lookups.lookup_tags.tag.lookup_tags",
+        "-_password_hash"
+
+    ]
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
     _password_hash = db.Column(db.String, nullable=False)
@@ -39,6 +50,15 @@ class Project(db.Model, SerializerMixin):
 
     __tablename__ = "projects"
 
+    serialize_rules = [
+
+        "-user.projects",
+        "-lookup_projects.project",
+        "-lookup_projects.lookup.user",
+        "-lookup_projects.lookup.lookup_tags"
+
+    ]
+
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     description = db.Column(db.String)
@@ -53,6 +73,16 @@ class LookupProject(db.Model, SerializerMixin):
 
     __tablename__ = "lookup_projects"
 
+    serialize_rules = [
+
+        "-lookup.lookup_projects",
+        "-lookup.user",
+        "-lookup.lookup_tags",
+        "-project.lookup_projects",
+        "-project.user"
+        
+    ]
+
     id = db.Column(db.Integer, primary_key=True)
     lookup_id = db.Column(db.Integer, db.ForeignKey('lookups.id'), nullable=False)
     project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
@@ -65,6 +95,14 @@ class LookupProject(db.Model, SerializerMixin):
 class Lookup(db.Model, SerializerMixin):
 
     __tablename__ = "lookups"
+
+    serialize_rules = [
+
+        "-user.lookups",
+        "-lookup_projects.lookup", 
+        "-lookup_tags.lookup"
+
+    ]
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
@@ -87,6 +125,13 @@ class LookupTag(db.Model, SerializerMixin):
 
     __tablename__ = "lookup_tags"
 
+    serialize_rules = [
+
+        "-lookup.lookup_tags", 
+        "-tag.lookup_tags"
+
+    ]
+
     id = db.Column(db.Integer, primary_key=True)
     lookup_id = db.Column(db.Integer, db.ForeignKey('lookups.id'), nullable=False)
     tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), nullable=False)
@@ -99,6 +144,12 @@ class LookupTag(db.Model, SerializerMixin):
 class Tag(db.Model, SerializerMixin):
 
     __tablename__ = "tags"
+
+    serialize_rules = [
+
+        "-lookup_tags.tag"
+
+    ]
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
