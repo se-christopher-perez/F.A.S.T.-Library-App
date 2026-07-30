@@ -16,12 +16,12 @@ def logged_in():
     if not session.get("user_id"):
         return {"error": "Unauthorized"}, 401
 
-def hidden_forbidden_content(project, user_id):
+def hidden_forbidden_content(content, user_id):
 
-    if not project:
+    if not content:
         return {"error": "Project not found"}, 404
     
-    if project.user_id != user_id:
+    if content.user_id != user_id:
         return {"error": "Unauthorized"}, 403
     
     return None
@@ -156,6 +156,7 @@ class ProjectByID(Resource):
 
     def patch(self, id):
 
+
         user_id = session.get("user_id")
 
         project = Project.query.filter_by(id=id).first()
@@ -186,15 +187,48 @@ class ProjectByID(Resource):
 
         return project.to_dict(), 200
 
+    def delete(self, id):
+
+        user_id = session.get("user_id")
+
+        project = Project.query.filter_by(id=id).first()
+
+        error = hidden_forbidden_content(project, user_id)
+
+        if error:
+
+            return error
+
+        LookupProject.query.filter_by(project_id=project.id).delete()
+
+        db.session.delete(project)
+
+        db.session.commit()
+
+        return (), 204
+
 class Lookups(Resource):
 
     def get(self):
 
         user_id = session.get("user_id")
 
-        lookups = Lookup.query.filter_by(user_id=user_id).all()
+        page = request.args.get("page", 1, type=int)
 
-        return [lookup.to_dict() for lookup in lookups], 200
+        per_page = request.args.get("per_page", 4, type=int)
+
+        paginated = Lookup.query.filter_by(user_id=user_id).paginate(
+            page=page, per_page=per_page, error_out=False
+        )
+
+        return {
+
+            "lookups": [lookup.to_dict() for lookup in paginated.items],
+            "total_pages": paginated.pages,
+            "current_page": paginated.page,
+            "total_lookups": paginated.total
+
+        }, 200
 
     def post(self):
 
@@ -242,7 +276,7 @@ class Lookups(Resource):
                     tag = Tag(name=tag_name)
 
                     db.session.add(tag)
-                    db.session.commit()  # commit so tag.id exists
+                    db.session.commit()
 
                 new_lookup_tag = LookupTag(
 
@@ -263,8 +297,63 @@ class Lookups(Resource):
 
         return new_lookup.to_dict(), 201
         
+class LookupByID(Resource):
 
+    def patch(self, id):
 
+        user_id = session.get("user_id")
+
+        lookup = Lookup.query.filter_by(id=id).first()
+
+        error = hidden_forbidden_content(lookup, user_id)
+
+        if error:
+
+            return error
+
+        data = request.get_json()
+
+        try:
+
+            for key in ["title", "description", "category", "content", "beginner_explanation", "advance_explanation"]:
+
+                if key in data:
+
+                    setattr(lookup, key, data[key])
+
+            db.session.commit()
+
+        except ValueError as error:
+
+            db.session.rollback()
+
+            return {"error": str(error)}, 422
+
+        return lookup.to_dict(), 200
+
+    def delete(self, id):
+
+        user_id = session.get("user_id")
+
+        lookup = Lookup.query.filter_by(id=id).first()
+
+        error = hidden_forbidden_content(lookup, user_id)
+
+        if error:
+
+            return error
+
+        LookupProject.query.filter_by(lookup_id=lookup.id).delete()
+
+        LookupTag.query.filter_by(lookup_id=lookup.id).delete()
+
+        db.session.delete(lookup)
+        
+        db.session.commit()
+
+        return {}, 204
+
+        
 
 api.add_resource(Signup, "/signup", endpoint="signup")
 api.add_resource(Login, "/login", endpoint="login")
@@ -273,7 +362,7 @@ api.add_resource(CheckSession, "/check_session", endpoint="check_session")
 api.add_resource(Projects, "/projects", endpoint="projects")
 api.add_resource(Lookups, "/lookups", endpoint="lookups")
 api.add_resource(ProjectByID, "/projects/<int:id>", endpoint="project_by_id")
-# api.add_resource(ProjectByID, "/lookup/<id:int>", endpoint="lookup_by_id")
+api.add_resource(LookupByID, "/lookups/<int:id>", endpoint="lookup_by_id")
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
