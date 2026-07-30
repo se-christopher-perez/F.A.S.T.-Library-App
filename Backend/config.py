@@ -12,7 +12,7 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
-app.config["AQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = os.environ.get("SECRET_KEY", "F.A.S.T.-Library-Secret")
 
 db = SQLAlchemy(app)
