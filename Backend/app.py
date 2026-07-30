@@ -16,6 +16,16 @@ def logged_in():
     if not session.get("user_id"):
         return {"error": "Unauthorized"}, 401
 
+def hidden_forbidden_content(project, user_id):
+
+    if not project:
+        return {"error": "Project not found"}, 404
+    
+    if project.user_id != user_id:
+        return {"error": "Unauthorized"}, 403
+    
+    return None
+
 class Signup(Resource):
 
     def post(self):
@@ -142,6 +152,40 @@ class Projects(Resource):
 
         return new_project.to_dict(), 201
 
+class ProjectByID(Resource):
+
+    def patch(self, id):
+
+        user_id = session.get("user_id")
+
+        project = Project.query.filter_by(id=id).first()
+
+        error = hidden_forbidden_content(project, user_id)
+
+        if error:
+
+            return error
+
+        data = request.get_json()
+
+        try:
+
+            for key in ["title", "description", "language"]:
+
+                if key in data:
+
+                    setattr(project, key, data[key])
+
+            db.session.commit()
+
+        except ValueError as error:
+
+            db.session.rollback()
+
+            return {"error": str(error)}, 422
+
+        return project.to_dict(), 200
+
 class Lookups(Resource):
 
     def get(self):
@@ -151,6 +195,73 @@ class Lookups(Resource):
         lookups = Lookup.query.filter_by(user_id=user_id).all()
 
         return [lookup.to_dict() for lookup in lookups], 200
+
+    def post(self):
+
+        user_id = session.get("user_id")
+
+        data = request.get_json()
+
+        project_id = data.get("project_id")
+
+        tag_names = data.get("tags", [])
+
+        try:
+            new_lookup = Lookup(
+
+                user_id=user_id,
+                title=data["title"],
+                description=data["description"],
+                category=data["category"],
+                content=data["content"],
+                beginner_explanation=data.get("beginner_explanation"),
+                advance_explanation=data.get("advance_explanation")
+                
+            )
+
+            db.session.add(new_lookup)
+            db.session.commit() 
+
+            if project_id:
+
+                new_lookup_project = LookupProject(
+
+                    lookup_id=new_lookup.id,
+                    project_id=project_id
+
+                )
+
+                db.session.add(new_lookup_project)
+
+            for tag_name in tag_names:
+
+                tag = Tag.query.filter_by(name=tag_name).first()
+
+                if not tag:
+
+                    tag = Tag(name=tag_name)
+
+                    db.session.add(tag)
+                    db.session.commit()  # commit so tag.id exists
+
+                new_lookup_tag = LookupTag(
+
+                    lookup_id=new_lookup.id,
+                    tag_id=tag.id
+
+                )
+
+                db.session.add(new_lookup_tag)
+
+            db.session.commit()
+
+        except (ValueError, KeyError) as error:
+
+            db.session.rollback()
+
+            return {"error": str(error)}, 422
+
+        return new_lookup.to_dict(), 201
         
 
 
@@ -161,6 +272,8 @@ api.add_resource(Logout, "/logout", endpoint="logout")
 api.add_resource(CheckSession, "/check_session", endpoint="check_session")
 api.add_resource(Projects, "/projects", endpoint="projects")
 api.add_resource(Lookups, "/lookups", endpoint="lookups")
+api.add_resource(ProjectByID, "/projects/<int:id>", endpoint="project_by_id")
+# api.add_resource(ProjectByID, "/lookup/<id:int>", endpoint="lookup_by_id")
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
