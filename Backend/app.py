@@ -4,6 +4,7 @@ from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 from config import app, db, api
 from models import User, Project, Lookup, LookupProject, Tag, LookupTag
+from ai_response import generate_lookup
 
 @app.before_request
 def logged_in():
@@ -489,6 +490,39 @@ class TagByID(Resource):
 
         return {}, 204
 
+class GenerateLookup(Resource):
+
+    def post(self):
+
+        user_id = session.get("user_id")
+
+        data = request.get_json()
+
+        question = data.get("description")
+
+        if not question:
+
+            return {"error": "description is required"}, 422
+
+        try:
+
+            ai_result = generate_lookup(question)
+
+        except Exception as error:
+
+            return {"error": "AI generation failed", "details": str(error)}, 500
+
+        return {
+
+            "description": question,
+            "title": ai_result.get("title"),
+            "category": ai_result.get("category"),
+            "content": ai_result.get("content"),
+            "beginner_explanation": ai_result.get("beginner_explanation"),
+            "advance_explanation": ai_result.get("advance_explanation")
+
+        }, 200
+
 api.add_resource(Signup, "/signup", endpoint="signup")
 api.add_resource(Login, "/login", endpoint="login")
 api.add_resource(Logout, "/logout", endpoint="logout")
@@ -501,6 +535,7 @@ api.add_resource(LookupTags, "/lookups/<int:lookup_id>/tags", endpoint="lookup_t
 api.add_resource(LookupTagByID, "/lookups/<int:lookup_id>/tags/<int:tag_id>", endpoint="lookup_tag_by_id")
 api.add_resource(Tags, "/tags", endpoint="tags")
 api.add_resource(TagByID, "/tags/<int:id>", endpoint="tag_by_id")
+api.add_resource(GenerateLookup, "/lookups/generate", endpoint="generate_lookup")
 
 
 if __name__ == "__main__":

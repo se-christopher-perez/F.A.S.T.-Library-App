@@ -12,6 +12,7 @@ flask-restful = "*"
 flask-cors = "*"
 sqlalchemy-serializer = "*"
 python-dotenv = "*"
+openai = "*"
 
 [dev-packages]
 
