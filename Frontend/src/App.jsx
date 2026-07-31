@@ -19,22 +19,17 @@ function App() {
 
     <>
 
-      {user ?
-        (
+      {user ? <NavBar /> : null}
 
-          <NavBar />
+      <Routes>
 
-        ) : (
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
 
-          <Routes>
+      </Routes>
 
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
 
-          </Routes>
-
-        )}
 
     </>
   )

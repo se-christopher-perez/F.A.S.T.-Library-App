@@ -9,6 +9,9 @@ from ai_response import generate_lookup
 @app.before_request
 def logged_in():
 
+    if request.method == "OPTIONS":
+        return
+
     open_routes = ["login", "signup", "check_session"]
 
     if request.endpoint in open_routes:
@@ -85,9 +88,15 @@ class Logout(Resource):
 
     def delete(self):
 
-        session["user_id"] = None
+        try:
 
-        return {}, 204
+            session["user_id"] = None
+
+            return {"message": "Logged out successfully"}, 200
+
+        except Exception as error:
+
+            return {"error": "Logout failed. Please try again."}, 500
 
 class CheckSession(Resource):
 

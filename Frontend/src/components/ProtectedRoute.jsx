@@ -1,5 +1,4 @@
 
-import { Children } from "react"
 import { useAuth } from "../context/AuthContext"
 import { Navigate  } from "react-router-dom"
 import loadGif from "../images/load.gif"
@@ -22,7 +21,7 @@ function ProtectedRoute({ children }) {
 
     }
 
-    return Children
+    return children
 
 }
 
