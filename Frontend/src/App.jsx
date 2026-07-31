@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard"
 import ProtectedRoute from './components/ProtectedRoute'
 import NavBar from "./components/NavBar"
 import ProjectDetails from './pages/ProjectDetails'
+import LookupDetails from './pages/LookupDertails'
 
 import './App.css'
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/projects/:id" element={<ProtectedRoute><ProjectDetails /></ProtectedRoute>} />
+        <Route path="/lookups/:id" element={<ProtectedRoute><LookupDetails /></ProtectedRoute>} />
         <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
 
       </Routes>

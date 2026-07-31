@@ -148,9 +148,9 @@ with app.app_context():
         title="lookup_quadratic_formula",
         description="What is the quadratic formula for solving ax^2 + bx + c = 0?",
         category="Formula",
-        content="x = (-b ± √(b² - 4ac)) / 2a",
+        content="x = (-b plus-or-minus sqrt(b^2 - 4ac)) / 2a",
         beginner_explanation="This formula finds the values of x where a parabola crosses zero.",
-        advance_explanation="The discriminant (b² - 4ac) determines whether the roots are real and distinct, real and equal, or complex.",
+        advance_explanation="The discriminant (b^2 - 4ac) determines whether the roots are real and distinct, real and equal, or complex.",
         user_id=user_1.id
     )
 
@@ -168,6 +168,7 @@ with app.app_context():
     db.session.commit()
 
     print("Connecting lookups to projects...")
+
 
     lookup_project_flask_routes = LookupProject(
         lookup_id=lookup_flask_routes.id,
@@ -189,8 +190,8 @@ with app.app_context():
         project_id=project_react_dashboard.id
     )
 
-    lookup_project_react_hooks = LookupProject(
-        lookup_id=lookup_react_hooks.id,
+    lookup_project_quadratic_formula = LookupProject(
+        lookup_id=lookup_quadratic_formula.id,
         project_id=project_react_dashboard.id
     )
 
@@ -209,14 +210,14 @@ with app.app_context():
         project_id=project_data_analysis.id
     )
 
-    lookup_project_react_hooks_duplicate = LookupProject(
+    lookup_project_react_hooks_data_analysis = LookupProject(
         lookup_id=lookup_react_hooks.id,
-        project_id=project_portfolio_site.id
+        project_id=project_data_analysis.id
     )
 
-    lookup_project_quadratic_formula = LookupProject(
-        lookup_id=lookup_quadratic_formula.id,
-        project_id=project_data_analysis.id
+    lookup_project_react_hooks_portfolio = LookupProject(
+        lookup_id=lookup_react_hooks.id,
+        project_id=project_portfolio_site.id
     )
 
     db.session.add_all([
@@ -224,12 +225,12 @@ with app.app_context():
         lookup_project_sqlalchemy_relationships,
         lookup_project_fetch_syntax,
         lookup_project_react_context,
-        lookup_project_react_hooks,
+        lookup_project_quadratic_formula,
         lookup_project_pandas_dataframes,
         lookup_project_pandas_groupby,
         lookup_project_pip_install,
-        lookup_project_react_hooks_duplicate,
-        lookup_project_quadratic_formula
+        lookup_project_react_hooks_data_analysis,
+        lookup_project_react_hooks_portfolio
     ])
     db.session.commit()
 

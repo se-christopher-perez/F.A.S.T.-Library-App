@@ -268,6 +268,16 @@ class Lookups(Resource):
 
             if project_id:
 
+                project = Project.query.filter_by(id=project_id).first()
+
+                if not project or project.user_id != user_id:
+
+                    db.session.delete(new_lookup)
+
+                    db.session.commit()
+
+                    return {"error": "You can only add lookups to your own projects"}, 403
+
                 new_lookup_project = LookupProject(
 
                     lookup_id=new_lookup.id,
@@ -420,11 +430,10 @@ class LookupTagByID(Resource):
         error = hidden_forbidden_content(lookup, user_id)
 
         if error:
+
             return error
 
-        lookup_tag = LookupTag.query.filter_by(
-            lookup_id=lookup_id, tag_id=tag_id
-        ).first()
+        lookup_tag = LookupTag.query.filter_by(lookup_id=lookup_id, tag_id=tag_id).first()
 
         if not lookup_tag:
 
