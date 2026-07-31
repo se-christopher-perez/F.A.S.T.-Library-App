@@ -43,7 +43,7 @@ export function createProject(projectData) {
 
 }
 
-export function updateProject(projectId, updates) {
+export function patchProject(projectId, updates) {
 
     return fetch(`http://localhost:5555/projects/${projectId}`, {
 
