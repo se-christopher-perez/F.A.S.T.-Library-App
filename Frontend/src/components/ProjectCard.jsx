@@ -58,12 +58,14 @@ function ProjectCard({ project }) {
                 <div className="desription-projectcard" >
 
                     <p>
+
                         {
                             project.description.length > 100 ?
                                 project.description.slice(0, 100) + "..."
                                 :
                                 project.description
                         }
+                        
                     </p>
 
                 </div>

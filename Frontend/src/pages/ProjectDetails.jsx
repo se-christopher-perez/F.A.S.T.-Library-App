@@ -2,9 +2,10 @@
 import React from "react"
 import { useParams } from "react-router-dom"
 import { useProjects } from "../context/ProjectContext"
+import LookupCard from "../components/LookupCard"
 
 function ProjectDetails() {
-    
+
     const { id } = useParams()
 
     const { projects } = useProjects()
@@ -15,7 +16,7 @@ function ProjectDetails() {
 
     })
 
-    if (!project){
+    if (!project) {
 
         return <h3>Project not found!</h3>
 
@@ -32,7 +33,17 @@ function ProjectDetails() {
             <h3>Description: </h3>
 
             <p>{project.description}</p>
-            
+
+            <div className="lookups-container">
+
+                {project.lookup_projects.map((lookupProject) => {
+
+                    return <LookupCard key={lookupProject.lookup.id} lookup={lookupProject.lookup} />
+
+                })}
+
+            </div>
+
         </div>
 
     )
