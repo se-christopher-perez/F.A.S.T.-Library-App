@@ -56,7 +56,7 @@ function Login() {
                     <input id="username-input" type="text" placeholder="Username" value={loginInfo.username} onChange={(e) => setLoginInfo((prevLoginInfo) => ({ ...prevLoginInfo, username: e.target.value }))} />
 
                     <label htmlFor="password-input">Password: </label>
-                    <input id="password-input" type="text" placeholder="Username" value={loginInfo.password} onChange={(e) => setLoginInfo((prevLoginInfo) => ({ ...prevLoginInfo, password: e.target.value }))} />
+                    <input id="password-input" type="password" placeholder="Password" value={loginInfo.password} onChange={(e) => setLoginInfo((prevLoginInfo) => ({ ...prevLoginInfo, password: e.target.value }))} />
 
                     <input type="submit" value="Login" />
 
