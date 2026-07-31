@@ -1,15 +1,17 @@
 
 import { React } from 'react'
-import './App.css'
 import { Routes, Route } from 'react-router-dom'
+import { useAuth } from './context/AuthContext'
+
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import Dashboard from "./pages/Dashboard"
 import ProtectedRoute from './components/ProtectedRoute'
-// import ProjectDetail from "./pages/ProjectDetail"
 import NavBar from "./components/NavBar"
+import ProjectDetails from './pages/ProjectDetails'
 
-import { useAuth } from './context/AuthContext'
+import './App.css'
+
 
 function App() {
 
@@ -25,11 +27,10 @@ function App() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/projects/:id" element={<ProtectedRoute><ProjectDetails /></ProtectedRoute>} />
         <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
 
       </Routes>
-
-
 
     </>
   )
