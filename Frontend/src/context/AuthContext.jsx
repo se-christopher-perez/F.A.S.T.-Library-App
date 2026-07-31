@@ -47,19 +47,29 @@ export function AuthProvider({ children }) {
         })
             .then((r) => {
 
-                return r.ok ? r.json() : null
+                return r.json()
 
             })
             .then((data) => {
 
-                setUser(data)
+                if (data.error) {
 
-                return data
+                    return data
+
+                } else {
+
+                    setUser(data)
+
+                    return data
+
+                }
 
             })
             .catch((error) => {
 
                 console.log(error)
+
+                return { error: "Something went wrong. Please try again." }
 
             })
 
@@ -77,25 +87,35 @@ export function AuthProvider({ children }) {
         })
             .then((r) => {
 
-                return r.ok ? r.json() : null
+                return r.json()
 
             })
             .then((data) => {
 
-                setUser(data)
+                if (data.error) {
 
-                return data
+                    return data
+
+                } else {
+
+                    setUser(data)
+
+                    return data
+
+                }
 
             })
             .catch((error) => {
 
                 console.log(error)
 
+                return { error: "Something went wrong. Please try again." }
+
             })
 
     }
 
-    function logout(){
+    function logout() {
 
         return fetch("http://localhost:5555/logout", {
 
@@ -103,26 +123,33 @@ export function AuthProvider({ children }) {
             credentials: "include"
 
         })
-        .then((r) => {
+            .then((r) => {
 
-            if (r.ok){
+                return r.json()
 
-                setUser(null)
+            })
+            .then((data) => {
 
-                return true
+                if (data.error){
 
-            }
+                    return data
 
-            return false
+                } else{
 
-        })
-        .catch((error) => {
+                    setUser(null)
 
-            console.log(error)
+                    return data
 
-            return false
+                }
 
-        })
+            })
+            .catch((error) => {
+
+                console.log(error)
+
+                return { error: "Something went wrong. Please try again." }
+
+            })
 
     }
 
@@ -132,8 +159,8 @@ export function AuthProvider({ children }) {
 
         <AuthContext.Provider value={values}>
 
-            { children }
-            
+            {children}
+
         </AuthContext.Provider>
 
     )

@@ -5,25 +5,36 @@ import { Routes, Route } from 'react-router-dom'
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import Dashboard from "./pages/Dashboard"
-import ProjectDetail from "./pages/ProjectDetail"
-import Navbar from "./components/Navbar"
+// import ProjectDetail from "./pages/ProjectDetail"
+import NavBar from "./components/NavBar"
+
+import { useAuth } from './context/AuthContext'
 
 function App() {
+
+  const { user } = useAuth()
 
   return (
 
     <>
 
-    <Navbar/>
+      {user ?
+        (
 
-    <Routes>
-      
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/" element={<Dashboard />} />
-      <Route path="/projects/:id" element={<ProjectDetail />} />
+          <NavBar />
+          
+        ) : (
 
-    </Routes>
+          <Routes>
+
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/" element={<Dashboard />} />
+            {/* <Route path="/projects/:id" element={<ProjectDetail />} /> */}
+
+          </Routes>
+
+        )}
 
     </>
   )
