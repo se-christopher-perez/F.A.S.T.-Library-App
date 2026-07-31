@@ -37,6 +37,8 @@ function LookupCard({ lookup }) {
 
         <div className="main-lookupcard-container">
 
+            <h2>F.A.S.T. Library</h2>
+
             <div className="lookupcard-container">
 
                 <div className="letter-lookupcard">

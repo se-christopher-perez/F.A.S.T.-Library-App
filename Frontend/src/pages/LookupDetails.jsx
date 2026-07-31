@@ -45,11 +45,15 @@ function LookupDetails() {
 
             <div className="lookup-description">
 
+                <h2>Description</h2>
+
                 <p><strong>Description/Prompt:</strong> {existLookup.description}</p>
 
             </div>
 
             <div className="lookup-content-container">
+                
+                <h2>Content</h2>
 
                 <pre className="lookup-content">
 
@@ -59,11 +63,25 @@ function LookupDetails() {
 
             </div>
 
-            <div className="lookupdetail-explanations">
+            <div className="lookup-detail-explanations">
+
+                <h2>Explainations</h2>
 
                 <p><strong>Beginner:</strong> {existLookup.beginner_explanation}</p>
 
                 <p><strong>Advanced:</strong> {existLookup.advance_explanation}</p>
+
+            </div>
+
+            <div className="lookup-tags">
+
+                <h2>Tags</h2>
+
+                {existLookup.lookup_tags.map((lookupTag) => {
+
+                    return <p key={lookupTag.id} className="tag-chip">{lookupTag.tag.name}</p>
+
+                })}
 
             </div>
 

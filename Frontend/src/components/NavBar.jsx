@@ -1,7 +1,7 @@
 
 import React, { useState } from "react"
 import { useAuth } from "../context/AuthContext"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 function NavBar() {
 
@@ -39,7 +39,15 @@ function NavBar() {
 
         <>
 
-            <button onClick={handleLogout}>LogOut</button>
+            <nav className="main-navbar-container">
+
+                <Link to="/">Dashboard</Link>
+                <Link to="/create-project">Create Project</Link>
+                <Link to="/generate-lookup">Generate Lookup</Link>
+                
+                <button onClick={handleLogout}>Logout</button>
+
+            </nav>
 
             <div className="main-error-container">
 

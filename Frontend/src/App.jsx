@@ -8,8 +8,10 @@ import Signup from "./pages/Signup"
 import Dashboard from "./pages/Dashboard"
 import ProtectedRoute from './components/ProtectedRoute'
 import NavBar from "./components/NavBar"
+import ProjectForm from './components/ProjectForm'
 import ProjectDetails from './pages/ProjectDetails'
-import LookupDetails from './pages/LookupDertails'
+import LookupDetails from './pages/LookupDetails'
+import GenerateLookupForm from './components/GenerateLookupForm'
 
 import './App.css'
 
@@ -30,6 +32,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/projects/:id" element={<ProtectedRoute><ProjectDetails /></ProtectedRoute>} />
         <Route path="/lookups/:id" element={<ProtectedRoute><LookupDetails /></ProtectedRoute>} />
+        <Route path="/create-project" element={<ProtectedRoute><ProjectForm /></ProtectedRoute>} />
+        <Route path="/generate-lookup" element={<ProtectedRoute><GenerateLookupForm /></ProtectedRoute>} />
         <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
 
       </Routes>

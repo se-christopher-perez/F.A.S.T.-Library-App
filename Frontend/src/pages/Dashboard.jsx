@@ -12,8 +12,6 @@ function Dashboard() {
 
         <div className="main-dashboard-container">
 
-            <ProjectForm/>
-
             <div className="projects-container">
 
                 <h1>Projects</h1>
