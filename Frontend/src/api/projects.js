@@ -68,7 +68,7 @@ export function patchProject(projectId, updates) {
 
 export function deleteProject(projectId) {
 
-        return fetch(`http://localhost:5555/projects/${projectId}`, {
+    return fetch(`http://localhost:5555/projects/${projectId}`, {
 
         method: "DELETE",
         credentials: "include"
@@ -76,7 +76,13 @@ export function deleteProject(projectId) {
     })
         .then((r) => {
 
-            return r.ok
+            if (r.ok) {
+
+                return { success: true }
+
+            }
+
+            return r.json()
 
         })
 
