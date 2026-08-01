@@ -1,4 +1,3 @@
-
 import { useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { useProjects } from "../context/ProjectContext"
@@ -10,26 +9,20 @@ function EditProject() {
     const { projects, updateProject } = useProjects()
 
     const project = projects.find((project) => {
-
         return project.id === Number(id)
-
     })
 
-    if (!project) {
-
-        return <p>Project not found</p>
-
-    }
-
     const [formData, setFormData] = useState({
-
-        title: project.title,
-        language: project.language,
-        description: project.description
-
+        title: project ? project.title : "",
+        language: project ? project.language : "",
+        description: project ? project.description : ""
     })
 
     const [error, setError] = useState(null)
+
+    if (!project) {
+        return <p>Project not found</p>
+    }
 
     function handleSubmit(e) {
 
@@ -38,19 +31,10 @@ function EditProject() {
         updateProject(Number(id), formData).then((data) => {
 
             if (data.error) {
-
                 setError(data.error)
-
-                setTimeout(() => {
-
-                    setError(null)
-
-                }, 5000)
-
+                setTimeout(() => setError(null), 5000)
             } else {
-
                 navigate(`/projects/${id}`)
-
             }
 
         })
@@ -67,7 +51,6 @@ function EditProject() {
 
                     <label htmlFor="title-input">Title: </label>
                     <input id="title-input" type="text" value={formData.title} onChange={(e) => setFormData((prevFormData) => ({ ...prevFormData, title: e.target.value }))} />
-
 
                     <label htmlFor="language-input">Language: </label>
                     <select id="language-input" value={formData.language} onChange={(e) => setFormData((prevFormData) => ({ ...prevFormData, language: e.target.value }))}>

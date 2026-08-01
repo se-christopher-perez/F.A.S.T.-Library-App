@@ -27,24 +27,24 @@ function EditLookup() {
 
     }
 
-    if (!existLookup) {
-
-        return <p>Lookup not found!</p>
-
-    }
-
     const [formData, setFormData] = useState({
-
-        title: existLookup.title,
-        description: existLookup.description,
-        category: existLookup.category,
-        content: existLookup.content,
-        beginner_explanation: existLookup.beginner_explanation,
-        advance_explanation: existLookup.advance_explanation
-
+    
+        title: existLookup ? existLookup.title : "",
+        description: existLookup ? existLookup.description : "",
+        category: existLookup ? existLookup.category : "",
+        content: existLookup ? existLookup.content : "",
+        beginner_explanation: existLookup ? existLookup.beginner_explanation : "",
+        advance_explanation: existLookup ? existLookup.advance_explanation : ""
+    
     })
 
     const [error, setError] = useState(null)
+
+    if (!existLookup) {
+     
+        return <p>Lookup not found!</p>
+    
+    }
 
     function handleSubmit(e) {
 

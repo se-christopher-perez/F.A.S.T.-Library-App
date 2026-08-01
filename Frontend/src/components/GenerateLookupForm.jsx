@@ -173,7 +173,7 @@ function GenerateLookupForm() {
 
                 <br /><br />
 
-                <button onClick={handleSave}>⚙️ Save ⚙️</button>
+                <button onClick={handleSave}>💾 Save 💾</button>
 
                 <div className="main-error-container">
 

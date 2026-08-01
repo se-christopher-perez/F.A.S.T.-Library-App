@@ -67,7 +67,7 @@ body {
 
 /* Navigation */
 
-/* Dashboard */
+/* - Dashboard */
 
 .main-dashboard-container {
 
@@ -216,7 +216,107 @@ body {
 
 /* Dashboard */
 
-/* Generator */
+/* Create A Project */
+
+.main-form-container {
+
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border: 1px solid #e0dccf;
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+
+}
+
+.form-title-container h1 {
+
+    margin: 0;
+    color: #6b5b95;
+
+}
+
+.title-language-container {
+
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin-top: 12px;
+
+}
+
+form label {
+
+    color: #8a8272;
+
+}
+
+.description-container {
+
+    margin-top: 12px;
+
+}
+
+form input {
+
+    border-radius: 8px;
+    border: 1px solid #e0dccf;
+    padding: 8px;
+    font-family: inherit;
+
+}
+
+form select {
+
+    border-radius: 8px;
+    border: 1px solid #e0dccf;
+    padding: 8px;
+    font-family: inherit;
+
+}
+
+form textarea {
+
+    border-radius: 8px;
+    border: 1px solid #e0dccf;
+    padding: 8px;
+    font-family: inherit;
+
+}
+
+.submit-container {
+
+    margin-top: 12px;
+
+}
+
+.submit-container input[type="submit"] {
+
+    background-color: #c9d8e6;
+    color: #3a5068;
+    cursor: pointer;
+
+}
+
+.error-handle-container {
+
+    margin-top: 8px;
+
+}
+
+.error-handle-container h1 {
+
+    color: #c0392b;
+    font-size: 18px;
+    margin: 0;
+
+}
+
+/* Create A Project */
+
+/* - Generator */
 
 .main-generator-container {
 
@@ -306,7 +406,7 @@ body {
 
 /* Generator */
 
-/* Project Details */
+/* - Project Details */
 
 .main-project-details-container {
 
@@ -409,6 +509,260 @@ body {
 }
 
 /* Project Details */
+
+/* Edit Project */
+
+.edit-form textarea {
+
+    padding: 8px;
+    border-radius: 8px;
+    font-family: inherit;
+    border: 1px solid #e0dccf;
+
+}
+
+.main-edit-form-container {
+
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border: 1px solid #e0dccf;
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+
+}
+
+.edit-form select {
+
+    border-radius: 8px;
+    font-family: inherit;
+    padding: 8px;
+    border: 1px solid #e0dccf;
+
+}
+
+.edit-form {
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+}
+
+.edit-form input[type="submit"] {
+
+    cursor: pointer;
+    background-color: #c9d8e6;
+    margin-top: 8px;
+    color: #3a5068;
+
+}
+
+.edit-form label {
+
+    color: #8a8272;
+
+}
+
+.edit-form input {
+
+    font-family: inherit;
+    border: 1px solid #e0dccf;
+    padding: 8px;
+    border-radius: 8px;
+
+}
+
+/* Edit Project */
+
+
+/* Lookup Details */
+
+.main-lookup-details-container {
+
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border: 1px solid #e0dccf;
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+
+}
+
+.lookup-title-container {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+
+}
+
+.lookup-title-container h1 {
+
+    background-color: #c9e4c5;
+    color: #3f5a3d;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    display: flex;
+    margin: 0;
+
+}
+
+.lookup-title-container h2 {
+
+    color: #6b5b95;
+    margin: 0;
+
+}
+
+.lookup-description h2 {
+
+    color: #8a8272;
+    margin: 16px 0 4px 0;
+
+}
+
+.lookup-content-container h2 {
+
+    color: #8a8272;
+    margin: 16px 0 4px 0;
+
+}
+
+.lookup-content {
+
+    background-color: #f5f1ea;
+    padding: 12px;
+    color: #5c5548;
+    white-space: pre-wrap;
+    border-radius: 8px;
+
+}
+
+.lookup-detail-explanations h2 {
+
+    color: #8a8272;
+    margin: 16px 0 4px 0;
+
+}
+
+.lookup-tags h2 {
+
+    color: #8a8272;
+    margin: 16px 0 8px 0;
+
+}
+
+.tag-chip {
+
+    display: inline-block;
+    background-color: #ddb7e0;
+    color: #5c2d63;
+    border-radius: 20px;
+    padding: 4px 14px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+
+}
+
+/* Lookup Details */
+
+/* Edit Lookup */
+
+.main-lookup-edit-form-container {
+
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border: 1px solid #e0dccf;
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+
+}
+
+.lookup-edit-form-title-container h1 {
+
+    margin: 0;
+    color: #6b5b95;
+
+}
+
+.lookup-edit-form {
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+}
+
+.title-category-container {
+
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+
+}
+
+label {
+
+    color: #8a8272;
+
+}
+
+.content-container textarea {
+
+    background-color: #f5f1ea;
+    font-family: monospace;
+
+}
+
+input {
+
+    border-radius: 8px;
+    border: 1px solid #e0dccf;
+    padding: 8px;
+    font-family: inherit;
+
+}
+
+select {
+
+    border-radius: 8px;
+    border: 1px solid #e0dccf;
+    padding: 8px;
+    font-family: inherit;
+
+}
+
+textarea {
+
+    border-radius: 8px;
+    border: 1px solid #e0dccf;
+    padding: 8px;
+    font-family: inherit;
+
+}
+
+.submit-container input[type="submit"] {
+
+    background-color: #c9d8e6;
+    color: #3a5068;
+    cursor: pointer;
+
+}
+
+/* Edit Lookup */
 
 /* Error */
 
