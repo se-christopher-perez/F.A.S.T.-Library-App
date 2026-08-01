@@ -116,19 +116,19 @@ User -> Project -> Lookup -> Tag
 ## Screenshots
 
 ### Login
-![Login screen](images/login.png)
+![Login screen](Frontend/src/images/login.png)
 
 ### Dashboard
-![Dashboard](images/dashboard.png)
+![Dashboard](Frontend/src/images/dashboard.png)
 
 ### Create a Project
-![Create](images/create.png)
+![Create](Frontend/src/images/create.png)
 
 ### Generate a Lookup
-![Generate](images/generate.png)
+![Generate](Frontend/src/images/generate.png)
 
 ### Look Up your Questions Through Projects
-![Lookup](images/lookups.png)
+![Lookup](Frontend/src/images/lookups.png)
 
 
 ## Created By
