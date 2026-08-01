@@ -1,4 +1,3 @@
-
 @font-face {
     
     font-family: "app_font";
@@ -11,7 +10,250 @@
 body {
 
     font-family: "app_font", sans-serif;
-    background-color: black;
-    color: green;
+    background-color: #f5f1ea;
+    color: #5c5548;
 
 }
+
+/* Dashboard */
+
+.main-dashboard-container {
+
+    display: flex;
+    flex-direction: row;
+
+}
+
+.main-user-card-container {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 250px;
+    max-height: 250px;
+    border: 1px solid #e0dccf;
+    background-color: #ffffff;
+    border-radius: 16px;
+
+}
+
+.main-user-card-container h1 {
+
+    font-size: 100px;
+    background-color: #c9e4c5;
+    color: #3f5a3d;
+    margin: 0;
+    width: 95%;
+    text-align: center;
+    border: 5px solid #ffffff;
+    border-radius: 16px;
+
+}
+
+.projects-container {
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.projects-container h1 {
+
+    width: 100%;
+    color: #6b5b95;
+
+}
+
+.main-projectcard-container {
+
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    min-height: 300px;
+    background-color: #ffffff;
+    border: 1px solid #e0dccf;
+    border-radius: 16px;
+
+}
+
+.project-grid-container {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+
+}
+
+.letter-projectcard {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    border-radius: 16px;
+    background-color: #e6c9dc;
+
+}
+
+.letter-projectcard h1 {
+
+    font-size: 150px;
+    margin: 0;
+    line-height: 1;
+    text-align: center;
+    width: 100%;
+    color: #7a4a63;
+
+}
+
+.title-projectcard h3 {
+
+    margin: 0;
+    margin-bottom: 2px;
+
+}
+
+.desription-projectcard {
+
+    margin-top: 0;
+    color: #8a8272;
+
+}
+
+.buttons-container {
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+
+}
+
+.more-button {
+
+    background-color: #c9d8e6;
+    color: #3a5068;
+    border-radius: 8px;
+
+}
+
+.more-edit {
+
+    background-color: #ddb7e0;
+    color: #5c2d63;
+    border-radius: 8px;
+
+}
+
+.more-delete {
+
+    background-color: #f0c2c2;
+    color: #7a2e2e;
+    border-radius: 8px;
+
+}
+
+/* Dashboard */
+
+/* Generator */
+
+.main-generator-container {
+
+    display: flex;
+    flex-direction: row;
+
+}
+
+.main-generator-form-container {
+
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    background-color: #ffffff;
+    border: 1px solid #e0dccf;
+    border-radius: 16px;
+    padding: 20px;
+    margin: auto;
+
+}
+
+.generator-form {
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+}
+
+.generator-form input[type="submit"] {
+
+    background-color: #c9d8e6;
+    color: #3a5068;
+    border-radius: 8px;
+    border: none;
+    padding: 8px;
+
+}
+
+.generated-preview {
+
+    background-color: #f5f1ea;
+    border: 1px solid #e0dccf;
+    border-radius: 16px;
+    padding: 12px;
+    margin-top: 12px;
+
+}
+
+.generated-preview h3 {
+
+    margin: 0;
+    color: #6b5b95;
+
+}
+
+.generated-preview pre {
+
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 8px;
+    color: #5c5548;
+
+}
+
+.main-tags-container {
+
+    margin-top: 12px;
+
+}
+
+.tags-container {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+
+}
+
+.x-button{
+
+    cursor: pointer;
+
+}
+
+/* Generator */
+
+/* Error */
+
+.main-error-container {
+
+    margin-top: 8px;
+    color: #c0392b;
+
+}
+
+/* Error */

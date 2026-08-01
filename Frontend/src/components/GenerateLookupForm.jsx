@@ -14,7 +14,7 @@ function GenerateLookupForm() {
     const [error, setError] = useState(null)
 
     const [tags, setTags] = useState([])
-    const[tagInput, setTagInput] = useState("")
+    const [tagInput, setTagInput] = useState("")
 
     function handleGenerate(e) {
 
@@ -50,7 +50,7 @@ function GenerateLookupForm() {
 
         e.preventDefault()
 
-        if (!projectId){
+        if (!projectId) {
 
             setError("Please select a project!")
 
@@ -66,7 +66,7 @@ function GenerateLookupForm() {
 
         addLookupToProject(Number(projectId), { ...generated, tags }).then((data) => {
 
-            if(data.error){
+            if (data.error) {
 
                 setError(data.error)
 
@@ -97,7 +97,7 @@ function GenerateLookupForm() {
             e.preventDefault()
 
             setTags((prevTags) => [...prevTags, tagInput.toLowerCase()])
-            
+
             setTagInput("")
 
         }
@@ -117,6 +117,8 @@ function GenerateLookupForm() {
                     <input id="question-input" value={question} onChange={(e) => setQuestion(e.target.value)} />
 
                     <input type="submit" value="⚙️ GENERATE ⚙️" />
+
+                    <br />
 
                 </form>
 
@@ -152,21 +154,24 @@ function GenerateLookupForm() {
 
                 <div className="main-tags-container">
 
-                    <input value={tagInput} onChange={(e) => setTagInput(e.target.value)} onKeyDown={handleTag}/>
+                    <label htmlFor="tag-input">Input Tags: </label>
+                    <input id="tag-input" value={tagInput} onChange={(e) => setTagInput(e.target.value)} onKeyDown={handleTag} />
 
                     <div className="tags-container">
 
-                    {tags.map((tag, index) => {
+                        {tags ? <label>Tags: </label> : null}
 
-                        return <TagCard key={index} tag={tag} handleRemove={() => setTags((prevTags) => prevTags.filter((t) => t !== tag))} />
+                        {tags.map((tag, index) => {
 
-                    })}
+                            return <TagCard key={index} tag={tag} handleRemove={() => setTags((prevTags) => prevTags.filter((t) => t !== tag))} />
+
+                        })}
 
                     </div>
 
                 </div>
 
-                <br/><br />
+                <br /><br />
 
                 <button onClick={handleSave}>⚙️ Save ⚙️</button>
 

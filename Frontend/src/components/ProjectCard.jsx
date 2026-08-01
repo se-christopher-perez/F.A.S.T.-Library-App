@@ -78,13 +78,13 @@ function ProjectCard({ project }) {
 
                 <div className="buttons-container">
 
-                    <button onClick={handleMore}>MORE</button>
-                    <button onClick={handleDelete} >DELETE</button>
-                    <button onClick={handleEdit} >EDIT</button>
+                    <button onClick={handleMore} className="more-button">MORE</button>
+                    <button onClick={handleEdit} className="more-edit" >EDIT</button>
+                    <button onClick={handleDelete} className="more-delete" >DELETE</button>
 
                 </div>
 
-                <div className="error-handle-container">
+                <div className="main-error-container">
 
                     {error ? <h1>{error}</h1> : null}
 

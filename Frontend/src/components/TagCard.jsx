@@ -1,17 +1,18 @@
 
 import React from "react"
 
-function TagCard({ tag, handleRemove }){
+function TagCard({ tag, handleRemove }) {
 
     return (
 
         <>
-        
-        <span>
-            
-            {tag}
-            
-            <button onClick={handleRemove}>×</button>
+
+            <span>
+
+                {tag}
+
+                <b onClick={handleRemove} className="x-button"> ❌ </b>
+
             </span>
 
         </>
