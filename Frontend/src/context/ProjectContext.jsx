@@ -2,7 +2,7 @@
 import { createContext, useContext, useState, useEffect } from "react"
 
 import { fetchProjects, createProject, patchProject, deleteProject } from "../api/projects"
-import { createLookup, deleteLookup } from "../api/lookups"
+import { createLookup, deleteLookup, patchLookup } from "../api/lookups"
 import { connectTagToLookup, disconnectTagFromLookup } from "../api/tags"
 
 import { useAuth } from "./AuthContext"
@@ -138,6 +138,50 @@ export function ProjectProvider({ children }) {
 
     }
 
+    function updateLookup(lookupId, updates) {
+
+        return patchLookup(lookupId, updates)
+            .then((data) => {
+
+                if (data.error) {
+
+                    return data
+
+                }
+
+                function updateProject(project) {
+
+                    const updatedLookupProjects = project.lookup_projects.map((lookup_project) => {
+
+                        return lookup_project.lookup.id === lookupId ?
+
+                        { ...lookup_project, lookup: data } : 
+
+                        lookup_project
+
+                    })
+
+                    return { ...project, lookup_projects: updatedLookupProjects }
+
+                }
+
+                setProjects((prevProjects) => {
+
+                    return prevProjects.map(updateProject)
+
+                })
+
+                return data
+
+            })
+            .catch((error) => {
+
+                return { error: "Something went wrong! Please try again." }
+
+            })
+
+    }
+
     function removeLookup(lookupId) {
 
         return deleteLookup(lookupId).then((result) => {
@@ -250,7 +294,7 @@ export function ProjectProvider({ children }) {
     }
 
 
-    const values = { projects, setProjects, addProject, updateProject, removeProject, addLookupToProject, removeLookup, addTagToLookup, removeTagFromLookup }
+    const values = { projects, setProjects, addProject, updateProject, removeProject, addLookupToProject, updateLookup, removeLookup, addTagToLookup, removeTagFromLookup }
 
     return (
 

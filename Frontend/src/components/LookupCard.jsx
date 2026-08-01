@@ -33,6 +33,12 @@ function LookupCard({ lookup }) {
 
     }
 
+    function handleEdit(){
+
+        navigate(`/lookups/${lookup.id}/edit`)
+
+    }
+
     return (
 
         <div className="main-lookupcard-container">
@@ -71,6 +77,7 @@ function LookupCard({ lookup }) {
 
                 <button onClick={handleMore}>MORE</button>
                 <button onClick={handleDelete} >DELETE</button>
+                <button onClick={handleEdit} >EDIT</button>
 
             </div>
 
