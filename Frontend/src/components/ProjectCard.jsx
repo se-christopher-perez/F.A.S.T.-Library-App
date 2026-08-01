@@ -31,9 +31,15 @@ function ProjectCard({ project }) {
 
     }
 
-    function handleMore(){
+    function handleMore() {
 
         navigate(`/projects/${project.id}`)
+
+    }
+
+    function handleEdit() {
+
+        navigate(`/projects/${project.id}/edit`)
 
     }
 
@@ -65,7 +71,7 @@ function ProjectCard({ project }) {
                                 :
                                 project.description
                         }
-                        
+
                     </p>
 
                 </div>
@@ -74,6 +80,7 @@ function ProjectCard({ project }) {
 
                     <button onClick={handleMore}>MORE</button>
                     <button onClick={handleDelete} >DELETE</button>
+                    <button onClick={handleEdit} >EDIT</button>
 
                 </div>
 

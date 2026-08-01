@@ -10,11 +10,11 @@ import ProtectedRoute from './components/ProtectedRoute'
 import NavBar from "./components/NavBar"
 import ProjectForm from './components/ProjectForm'
 import ProjectDetails from './pages/ProjectDetails'
+import EditProject from './pages/EditProject'
 import LookupDetails from './pages/LookupDetails'
 import GenerateLookupForm from './components/GenerateLookupForm'
 
 import './App.css'
-
 
 function App() {
 
@@ -31,6 +31,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/projects/:id" element={<ProtectedRoute><ProjectDetails /></ProtectedRoute>} />
+        <Route path="/projects/:id/edit" element={<ProtectedRoute><EditProject /></ProtectedRoute>} />
         <Route path="/lookups/:id" element={<ProtectedRoute><LookupDetails /></ProtectedRoute>} />
         <Route path="/create-project" element={<ProtectedRoute><ProjectForm /></ProtectedRoute>} />
         <Route path="/generate-lookup" element={<ProtectedRoute><GenerateLookupForm /></ProtectedRoute>} />

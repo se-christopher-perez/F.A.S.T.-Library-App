@@ -96,7 +96,7 @@ function GenerateLookupForm() {
 
             e.preventDefault()
 
-            setTags((prevTags) => [...prevTags, tagInput])
+            setTags((prevTags) => [...prevTags, tagInput.toLowerCase()])
             
             setTagInput("")
 
