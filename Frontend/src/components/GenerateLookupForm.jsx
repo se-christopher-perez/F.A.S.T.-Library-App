@@ -136,44 +136,48 @@ function GenerateLookupForm() {
 
                         <p>{generated.advance_explanation}</p>
 
+                        <select value={projectId} onChange={(e) => setProjectId(e.target.value)}>
+
+                            <option value="">Select a Project</option>
+
+                            {projects.map((project) => {
+
+                                return <option key={project.id} value={project.id}>{project.title}</option>
+
+                            })}
+
+                        </select>
+
+                        <div className="main-tags-container">
+
+                            <label htmlFor="tag-input">Input Tags: </label>
+                            <input id="tag-input" value={tagInput} onChange={(e) => setTagInput(e.target.value)} onKeyDown={handleTag} />
+
+                            <div className="tags-container">
+
+                                {tags ? <label>Tags: </label> : null}
+
+                                {tags.map((tag, index) => {
+
+                                    return <TagCard key={index} tag={tag} handleRemove={() => setTags((prevTags) => prevTags.filter((t) => t !== tag))} />
+
+                                })}
+
+                            </div>
+
+                        </div>
+
+                        <br /><br />
+
+                        <button onClick={handleSave}>💾 Save 💾</button>
+
                     </div>
+
+
 
                 ) : null}
 
-                <select value={projectId} onChange={(e) => setProjectId(e.target.value)}>
 
-                    <option value="">Select a Project</option>
-
-                    {projects.map((project) => {
-
-                        return <option key={project.id} value={project.id}>{project.title}</option>
-
-                    })}
-
-                </select>
-
-                <div className="main-tags-container">
-
-                    <label htmlFor="tag-input">Input Tags: </label>
-                    <input id="tag-input" value={tagInput} onChange={(e) => setTagInput(e.target.value)} onKeyDown={handleTag} />
-
-                    <div className="tags-container">
-
-                        {tags ? <label>Tags: </label> : null}
-
-                        {tags.map((tag, index) => {
-
-                            return <TagCard key={index} tag={tag} handleRemove={() => setTags((prevTags) => prevTags.filter((t) => t !== tag))} />
-
-                        })}
-
-                    </div>
-
-                </div>
-
-                <br /><br />
-
-                <button onClick={handleSave}>💾 Save 💾</button>
 
                 <div className="main-error-container">
 

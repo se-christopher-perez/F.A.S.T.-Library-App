@@ -1,3 +1,4 @@
+
 @font-face {
     
     font-family: "app_font";
@@ -14,6 +15,155 @@ body {
     color: #5c5548;
 
 }
+
+/* Login and Signup */
+
+.main-login-container {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+
+}
+
+.main-login-container h1 {
+
+    color: #6b5b95;
+
+}
+
+.login-container {
+
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border: 1px solid #e0dccf;
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 350px;
+
+}
+
+.login-container form {
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.login-container label {
+
+    color: #8a8272;
+
+}
+
+.login-container input {
+
+    border-radius: 8px;
+    border: 1px solid #e0dccf;
+    padding: 8px;
+    font-family: inherit;
+
+}
+
+.login-container input[type="submit"] {
+
+    background-color: #c9d8e6;
+    color: #3a5068;
+    cursor: pointer;
+    margin-top: 8px;
+
+}
+
+.login-container span {
+
+    color: #5c5548;
+
+}
+
+.login-container a {
+
+    color: #6b5b95;
+
+}
+
+
+.main-signup-container {
+
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    align-items: center;
+
+}
+
+.main-signup-container h1 {
+
+    color: #6b5b95;
+
+}
+
+.signup-container {
+
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border: 1px solid #e0dccf;
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 350px;
+
+}
+
+.signup-container form {
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.signup-container label {
+
+    color: #8a8272;
+
+}
+
+.signup-container input {
+
+    border-radius: 8px;
+    padding: 8px;
+    font-family: inherit;
+    border: 1px solid #e0dccf;
+
+}
+
+.signup-container input[type="submit"] {
+
+    background-color: #ddb7e0;
+    margin-top: 8px;
+    color: #3a5068;
+    cursor: pointer;
+
+
+}
+
+.signup-container span {
+
+    color: #5c5548;
+
+}
+
+.signup-container a {
+
+    color: #6b5b95;
+
+}
+
+/* Login and Signup */
+
 
 /* Navigation */
 

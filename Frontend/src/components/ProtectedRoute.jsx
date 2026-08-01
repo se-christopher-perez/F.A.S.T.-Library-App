@@ -9,9 +9,7 @@ function ProtectedRoute({ children }) {
 
     if (isLoading) {
 
-        console.log("Loading state active")
-
-        return <img src={loadGif} alt="Loading..." />
+        return <p>Loading...</p>
 
     }
 

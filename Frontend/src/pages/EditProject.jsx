@@ -1,4 +1,5 @@
-import { useState } from "react"
+
+import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { useProjects } from "../context/ProjectContext"
 
@@ -13,12 +14,22 @@ function EditProject() {
     })
 
     const [formData, setFormData] = useState({
-        title: project ? project.title : "",
-        language: project ? project.language : "",
-        description: project ? project.description : ""
+        title: "",
+        language: "",
+        description: ""
     })
 
     const [error, setError] = useState(null)
+
+    useEffect(() => {
+        if (project) {
+            setFormData({
+                title: project.title,
+                language: project.language,
+                description: project.description
+            })
+        }
+    }, [project])
 
     if (!project) {
         return <p>Project not found</p>

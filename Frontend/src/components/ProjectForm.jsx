@@ -1,10 +1,13 @@
 
 import { useState } from "react"
 import { useProjects } from "../context/ProjectContext"
+import { useNavigate } from "react-router-dom"
 
 function ProjectForm() {
 
     const { addProject } = useProjects()
+
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
 
@@ -41,6 +44,8 @@ function ProjectForm() {
                     language: ""
 
                 })
+
+                navigate("/")
 
             }
 

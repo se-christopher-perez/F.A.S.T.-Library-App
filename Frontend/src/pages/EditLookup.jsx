@@ -1,5 +1,5 @@
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { useProjects } from "../context/ProjectContext"
 
@@ -28,22 +28,37 @@ function EditLookup() {
     }
 
     const [formData, setFormData] = useState({
-    
-        title: existLookup ? existLookup.title : "",
-        description: existLookup ? existLookup.description : "",
-        category: existLookup ? existLookup.category : "",
-        content: existLookup ? existLookup.content : "",
-        beginner_explanation: existLookup ? existLookup.beginner_explanation : "",
-        advance_explanation: existLookup ? existLookup.advance_explanation : ""
-    
+
+        title: "",
+        description: "",
+        category: "",
+        content: "",
+        beginner_explanation: "",
+        advance_explanation: ""
+
     })
 
     const [error, setError] = useState(null)
 
+    useEffect(() => {
+
+        if (existLookup) {
+            setFormData({
+                title: existLookup.title,
+                description: existLookup.description,
+                category: existLookup.category,
+                content: existLookup.content,
+                beginner_explanation: existLookup.beginner_explanation,
+                advance_explanation: existLookup.advance_explanation
+            })
+        }
+
+    }, [existLookup])
+
     if (!existLookup) {
-     
+
         return <p>Lookup not found!</p>
-    
+
     }
 
     function handleSubmit(e) {
@@ -57,9 +72,7 @@ function EditLookup() {
                 setError(data.error)
 
                 setTimeout(() => {
-
                     setError(null)
-
                 }, 5000)
 
             } else {
