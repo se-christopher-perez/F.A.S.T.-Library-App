@@ -1,6 +1,6 @@
 
 import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 
 function Login() {
@@ -15,7 +15,7 @@ function Login() {
         password: ""
 
     })
-    
+
     const [error, setError] = useState(null)
 
     function handleLogin(e) {
@@ -48,6 +48,8 @@ function Login() {
 
         <div className="main-login-container">
 
+            <h1>F.A.S.T. LIBRARY</h1>
+
             <div className="login-container">
 
                 <form onSubmit={handleLogin}>
@@ -61,6 +63,10 @@ function Login() {
                     <input type="submit" value="Login" />
 
                 </form>
+
+                <br />
+
+                <span>Need an account? </span><Link to="/signup">Sign Up</Link>
 
             </div>
 

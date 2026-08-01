@@ -48,6 +48,8 @@ function Signup() {
 
         <div className="main-signup-container">
 
+            <h1>F.A.S.T. LIBRARY</h1>
+
             <div className="signup-container">
 
                 <form onSubmit={handleSignUp}>

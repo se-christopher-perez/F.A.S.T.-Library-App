@@ -1,5 +1,17 @@
 
+@font-face {
+    
+    font-family: "app_font";
+    src: url("./fonts/app_font.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 body {
+
+    font-family: "app_font", sans-serif;
     background-color: black;
     color: green;
+
 }

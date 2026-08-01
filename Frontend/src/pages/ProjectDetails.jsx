@@ -36,11 +36,25 @@ function ProjectDetails() {
 
             <div className="lookups-container">
 
-                {project.lookup_projects.map((lookupProject) => {
+                {
 
-                    return <LookupCard key={lookupProject.lookup.id} lookup={lookupProject.lookup} />
+                    project.lookup_projects.length === 0 ? (
 
-                })}
+                        <p>You have no Lookups yet! To get started, head to Generator!</p>
+
+                    ) : (
+
+                        project.lookup_projects.map((lookupProject) => {
+
+                            return <LookupCard key={lookupProject.lookup.id} lookup={lookupProject.lookup} />
+
+                        })
+
+                    )
+
+                }
+
+
 
             </div>
 
