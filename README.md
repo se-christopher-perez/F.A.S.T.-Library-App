@@ -3,14 +3,14 @@
 
 ## Description
 
-F.A.S.T. Library (Formulas, Algorithms, Syntax, Tools) is a full-stack app for developers to save and organize quick-reference lookups — syntax snippets, algorithms, formulas, and tool commands — grouped into projects and tagged for easy searching. Users log in, create projects, and either manually generate or use AI (OpenAI) to generate a lookup by asking a question, which auto-fills the title, category, content, and explanations. Lookups can be tagged, edited, and deleted, and are scoped so users only ever see their own data.
+F.A.S.T. Library (Formulas, Algorithms, Syntax, Tools) is a full-stack app for developers to save and organize quick-reference lookups, syntax snippets, algorithms, formulas, and tool commands, grouped into projects and tagged for easy searching. Users log in, create projects, and either manually generate or use OpenAI to generate a lookup by asking a question, which generates the title, category, content, and explanations. Lookups can be tagged, edited, and deleted, and are scoped so users only ever see their own data.
 
 ## Technologies Used
 
 - **Backend:** Flask, Flask-RESTful, Flask-SQLAlchemy, Flask-Migrate, Flask-Bcrypt, Flask-CORS
 - **Database:** SQLite (SQLAlchemy ORM)
 - **Frontend:** React, React Router, Context API
-- **AI:** OpenAI API (gpt-4o-mini) for AI-assisted lookup generation
+- **AI:** OpenAI API for AI-assisted lookup generations
 - **Other:** SQLAlchemy-Serializer for JSON serialization, bcrypt for password hashing, python-dotenv for environment variables
 
 ## Setup / Run Instructions
@@ -62,7 +62,7 @@ You'll need both running at the same time.
 
 - Create, view, edit, and delete projects (title, description, language)
 
-- Create lookups via AI generation — ask a question, review the AI-generated draft (title, category, content, beginner/advanced explanations), attach tags as chips, and save to a chosen project
+- Create lookups via AI generation ask a question, review the AI-generated draft (title, category, content, beginner/advanced explanations), attach tags as chips, and save to a chosen project
 
 - Edit and delete existing lookups
 
@@ -70,7 +70,7 @@ You'll need both running at the same time.
 
 - Empty states for dashboards/pages with no data yet
 
-- Full ownership protection on the backend — a user cannot view, edit, or delete another user's projects or lookups, and cannot connect a lookup to a project they don't own
+- Full ownership protection on the backend a user cannot view, edit, or delete another user's projects or lookups, and cannot connect a lookup to a project they don't own
 
 ## Models / Relationships
 
@@ -78,7 +78,7 @@ You'll need both running at the same time.
 User -> Project -> Lookup -> Tag
 ```
 
-- `User` has many `Project`s and `Lookup`s
+- `User` has many `Project` and `Lookup`s
 
 - `Project` and `Lookup` are connected many-to-many through `LookupProject` (a lookup can belong to multiple projects)
 
