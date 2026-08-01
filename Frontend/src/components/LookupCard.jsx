@@ -33,7 +33,7 @@ function LookupCard({ lookup }) {
 
     }
 
-    function handleEdit(){
+    function handleEdit() {
 
         navigate(`/lookups/${lookup.id}/edit`)
 
@@ -43,7 +43,13 @@ function LookupCard({ lookup }) {
 
         <div className="main-lookupcard-container">
 
-            <h2>F.A.S.T. Library</h2>
+            <div className="title-lookupcard" >
+
+                <h3>{lookup.title}</h3>
+                
+                <br />
+
+            </div>
 
             <div className="lookupcard-container">
 
@@ -53,12 +59,7 @@ function LookupCard({ lookup }) {
 
                 </div>
 
-
-                <div className="title-lookupcard" >
-
-                    <h3>{lookup.title}</h3>
-
-                </div>
+                <br />
 
                 <p>
 
@@ -75,9 +76,9 @@ function LookupCard({ lookup }) {
 
             <div className="buttons-container">
 
-                <button onClick={handleMore}>MORE</button>
-                <button onClick={handleDelete} >DELETE</button>
-                <button onClick={handleEdit} >EDIT</button>
+                <button onClick={handleMore} className="more-button">MORE</button>
+                <button onClick={handleEdit} className="edit-button" >EDIT</button>
+                <button onClick={handleDelete} className="delete-button">DELETE</button>
 
             </div>
 

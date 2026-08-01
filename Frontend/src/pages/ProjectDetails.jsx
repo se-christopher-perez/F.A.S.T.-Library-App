@@ -34,6 +34,8 @@ function ProjectDetails() {
 
             <p>{project.description}</p>
 
+            <h2>F.A.S.T. Library</h2>
+
             <div className="lookups-container">
 
                 {

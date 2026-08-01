@@ -49,15 +49,16 @@ function ProjectCard({ project }) {
 
             <div className="main-projectcard-container">
 
-                <div className="letter-projectcard">
-
-                    <h1>{project.language.slice(0, 1).toUpperCase()}</h1>
-
-                </div>
-
                 <div className="title-projectcard" >
 
                     <h3>{project.title}</h3>
+
+
+                </div>
+
+                <div className="letter-projectcard">
+
+                    <h1>{project.language.slice(0, 1).toUpperCase()}</h1>
 
                 </div>
 
@@ -79,8 +80,8 @@ function ProjectCard({ project }) {
                 <div className="buttons-container">
 
                     <button onClick={handleMore} className="more-button">MORE</button>
-                    <button onClick={handleEdit} className="more-edit" >EDIT</button>
-                    <button onClick={handleDelete} className="more-delete" >DELETE</button>
+                    <button onClick={handleEdit} className="edit-button" >EDIT</button>
+                    <button onClick={handleDelete} className="delete-button">DELETE</button>
 
                 </div>
 
