@@ -16,11 +16,25 @@ function Dashboard() {
 
                 <h1>Projects</h1>
 
-                {projects.map((project) => {
+                {
 
-                    return <ProjectCard key={project.id} project={project} />
+                    projects.length === 0 ? (
 
-                })}
+                        <p>You have no projects yet! To get started, head to create project!</p>
+
+                    ) : (
+
+                        projects.map((project) => {
+
+                            return <ProjectCard key={project.id} project={project} />
+
+                        })
+
+                    )
+
+                }
+
+
 
             </div>
 
